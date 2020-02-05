@@ -20,6 +20,7 @@ jobs:
           git config --global user.email "homebrew-tap@stelligent.com"
           git config --global user.name "stelligent-homebrew-tap-updater"
       - name: Update versions and sha256
+        id: update
         run: |
           bash ./.github/scripts/update_cfn_nag_formula_version.sh
           rm -rf cfn_nag
@@ -29,5 +30,5 @@ jobs:
         run: |
           git diff
           git add .
-          git commit --allow-empty -m "auto-update cfn_nag version and sha256"
+          git commit --allow-empty -m "auto-update cfn_nag version (${{ steps.update.outputs.cfn_nag_version }}) and sha256"
           git push

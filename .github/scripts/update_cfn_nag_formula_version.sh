@@ -18,3 +18,6 @@ CFN_NAG_SHA256=$(curl -L -s $CFN_NAG_URL/tarball/v$CFN_NAG_VERSION | shasum -a 2
 sed -i "s#^\(  url\) .*#\1 \"$CFN_NAG_URL/tarball/v$CFN_NAG_VERSION\"#" Formula/cfn-nag.rb
 sed -i "s/^\(  version\) .*/\1 \"$CFN_NAG_VERSION\"/" Formula/cfn-nag.rb
 sed -i "s/^\(  sha256\) .*/\1 \"$CFN_NAG_SHA256\"/" Formula/cfn-nag.rb
+
+# Set cfn_nag version as a GitHub Workflow output
+echo "::set-output name=cfn_nag_version::v${CFN_NAG_VERSION}"
